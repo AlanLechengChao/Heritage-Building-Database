@@ -1,18 +1,31 @@
-class Buildings {
-    constructor(currentName,englishName,address) {
-        this.address = address;
-        this.currentName = currentName;
-        this.englishName = englishName;
-        this.coordinates = [NaN, NaN];
-        this.designation = [];
-    }
-}
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
+    
+    // document.getElementById("setDesignation").addEventListener("click", function(){
+    //     designations.forEach(function (d) {
+    //         firebase.firestore().collection('designations').doc(`${d.year}-${d.level}-${d.type}`).set(d).then(function() {
+    //             console.log(d.designation + " set");
+    //         })
+    //     })
+    // })
+
+    // document.getElementById("reader").addEventListener('change', function (event) {
+    //     var reader = new FileReader(); // File reader to read the file 
+
+    //     // This event listener will happen when the reader has read the file
+    //     reader.addEventListener('load', function () {
+    //         var result = JSON.parse(reader.result); // Parse the result into an object 
+    //         console.log(result);
+    //         result.forEach(function(building) {
+    //             firebase.firestore().collection('buildings').add(building).then(function() {
+    //                 console.log("set");
+    //             });
+    //         })
+    //     });
+
+    //     reader.readAsText(event.target.files[0]);
+        
+    // })
+    console.log(Math.random());
     // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
     // // The Firebase SDK is initialized and available here!
     //
@@ -38,22 +51,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // 需要一个ID，也许需要用google sheet里面的
     // 接下来要看的
-    // 1. 如何批量导入数据
-    // 2. github/collaboration deploy
     // 3. security rules ()
     // 4. auth
     // 5. elastic search
-    // 6. timestamp
-    firebase.firestore().collection('buildings').add({
-        address: "国和路346号",
-        currentName: "江湾体育场",
-        englishName: "Jiangwan Stadium",
-        coordinates: [NaN, NaN],
-        designation: []
-    }).then(function() {
-        console.log("successly written");
-    })
+    // 6. timestamp, 最后一次edit的user 
+    // 7. user list
 
+    // 1. year
+    // 2. designation
+    // 
+    
+
+    // SDK code of Firebase
     try {
         let app = firebase.app();
         let features = [
