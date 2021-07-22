@@ -1,38 +1,17 @@
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
+createApp(App).use(router).mount('#app')
+
+
 document.addEventListener('DOMContentLoaded', function () {
-    
-    // document.getElementById("setDesignation").addEventListener("click", function(){
-    //     designations.forEach(function (d) {
-    //         firebase.firestore().collection('designations').doc(`${d.year}-${d.level}-${d.type}`).set(d).then(function() {
-    //             console.log(d.designation + " set");
-    //         })
-    //     })
-    // })
-    
-    // document.getElementById("reader").addEventListener('change', function (event) {
-    //     var reader = new FileReader(); // File reader to read the file 
-
-    //     // This event listener will happen when the reader has read the file
-    //     reader.addEventListener('load', function () {
-    //         var result = JSON.parse(reader.result); // Parse the result into an object 
-    //         console.log(result);
-    //         result.forEach(function(building) {
-    //             firebase.firestore().collection('buildings').add(building).then(function() {
-    //                 console.log("set");
-    //             });
-    //         })
-    //     });
-
-    //     reader.readAsText(event.target.files[0]);
-        
-    // })
-
-
-    document.getElementById('submit').addEventListener('click', function() {
+    document.getElementById('submit').addEventListener('click', function () {
         let fieldValue = document.getElementById('fieldValues').value;
-        let value =  document.getElementById('value').value;
+        let value = document.getElementById('value').value;
         console.log(fieldValue);
-        firebase.firestore().collection('buildings').where(fieldValue, "==", value).get().then(function(result) {
-            result.forEach(function(d) {
+        firebase.firestore().collection('buildings').where(fieldValue, "==", value).get().then(function (result) {
+            result.forEach(function (d) {
                 let dom = document.createElement('p');
                 document.body.appendChild(dom);
                 dom.innerHTML = JSON.stringify(d.data(), null, '<br>&nbsp;');
@@ -60,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     firebase.firestore().collection('buildings').where("currentName", "==", "鲁迅墓").get().then(function (result) {
         result.forEach((d) => {
             d.data().designations[0].get().then((doc) => {
-                console.log("sub",doc.data());
+                console.log("sub", doc.data());
             })
             console.log(d.data());
         })
@@ -76,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 1. year
     // 2. designation
     // 
-    
+
 
     // SDK code of Firebase
     try {

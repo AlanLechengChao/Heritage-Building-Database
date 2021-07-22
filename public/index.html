@@ -24,7 +24,22 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
   </head>
   <body>
-    
+    <div id='app'></div>
+    <style>
+      p {
+        font-family: monospace;
+        font-size: 1em;
+      }
+    </style>
+    <h3>Test Querying Form</h3>
+      <label for="fieldValues">Field Values</label>
+      <select id="fieldValues" name="fieldValues">
+        <option value="youxiu_id">youxiu_id</option>
+        <option value="wenbao_id">wenbao_id</option>
+        <option value="current_name">current_name</option>
+      </select>
+      <input type="text" id="value">
+      <button id='submit'>submit</button>
     <!-- <div id="message">
       <h2>Welcomesdf</h2>
       <a href="another.html">haha</a>
@@ -36,6 +51,6 @@
     <!-- <input id='reader' type='file' accept='json'><br> -->
 
     <!-- <button id="setDesignation">Set Designation</button> -->
-    <script src = "js/import-data.js"></script>
+    <!-- <script src = "js/import-data.js"></script> -->
   </body>
 </html>
