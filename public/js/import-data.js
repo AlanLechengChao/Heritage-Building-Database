@@ -8,37 +8,21 @@ document.addEventListener('DOMContentLoaded', function () {
     //     })
     // })
     
-    // document.getElementById("reader").addEventListener('change', function (event) {
-    //     var reader = new FileReader(); // File reader to read the file 
 
-    //     // This event listener will happen when the reader has read the file
-    //     reader.addEventListener('load', function () {
-    //         var result = JSON.parse(reader.result); // Parse the result into an object 
-    //         console.log(result);
-    //         result.forEach(function(building) {
-    //             firebase.firestore().collection('buildings').add(building).then(function() {
-    //                 console.log("set");
-    //             });
+
+
+    // document.getElementById('submit').addEventListener('click', function() {
+    //     let fieldValue = document.getElementById('fieldValues').value;
+    //     let value =  document.getElementById('value').value;
+    //     console.log(fieldValue);
+    //     firebase.firestore().collection('buildings').where(fieldValue, "==", value).get().then(function(result) {
+    //         result.forEach(function(d) {
+    //             let dom = document.createElement('p');
+    //             document.body.appendChild(dom);
+    //             dom.innerHTML = JSON.stringify(d.data(), null, '<br>&nbsp;');
     //         })
-    //     });
-
-    //     reader.readAsText(event.target.files[0]);
-        
+    //     })
     // })
-
-
-    document.getElementById('submit').addEventListener('click', function() {
-        let fieldValue = document.getElementById('fieldValues').value;
-        let value =  document.getElementById('value').value;
-        console.log(fieldValue);
-        firebase.firestore().collection('buildings').where(fieldValue, "==", value).get().then(function(result) {
-            result.forEach(function(d) {
-                let dom = document.createElement('p');
-                document.body.appendChild(dom);
-                dom.innerHTML = JSON.stringify(d.data(), null, '<br>&nbsp;');
-            })
-        })
-    })
 
 
     console.log(Math.random());

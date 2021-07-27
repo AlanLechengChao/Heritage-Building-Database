@@ -9,10 +9,17 @@ npm install
 ```
 npm run serve
 ```
+## OR
+```
+npm run build
+firebase serve --only hosting
+```
+
 
 ### Compiles and minifies for production
 ```
 npm run build
+firebase deploy
 ```
 
 ### Customize configuration

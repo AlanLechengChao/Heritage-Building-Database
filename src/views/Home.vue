@@ -1,17 +1,28 @@
 <template>
   <div class="home">
-    Homepage
+    <h2>Home</h2>
+    
   </div>
+  <Search />
 </template>
 
 <script>
-// @ is an alias to /src
+import { db } from '../main.js'
+import Search from '../components/Search.vue'
+
 
 
 export default {
+  
   name: 'Home',
-  components: {
-    
-  }
+  data() {
+      return {
+        resultJSON: {}
+      }
+    },
+  
+  components: {Search},
 }
+
+
 </script>
