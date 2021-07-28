@@ -1,4 +1,7 @@
 <template>
+<userinfo></userinfo>
+  
+  
   <div id="nav">
     <router-link to="/">Home</router-link>
     <router-link to="/buildings">Buildings</router-link>
@@ -12,11 +15,13 @@
 
 <script>
 
-
+import Userinfo from "@/components/Userinfo.vue";
 
 export default {
   name: 'App',
-  
+  components:{
+    Userinfo
+  }, 
   mounted() {
     // console.log(this.$db)
   }
