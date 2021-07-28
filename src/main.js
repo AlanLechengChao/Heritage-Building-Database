@@ -13,6 +13,7 @@ let app = createApp(App)
 export const db = firebase.initializeApp({
     apiKey: 'AIzaSyD2nLnhZyAEY5cLnLMkdQ2w6FLQmr3gAls',
     projectId: 'heritage-buildings-database',
+    authDomain: "heritage-buildings-database.web.app", 
 }).firestore();
 
 
