@@ -21,6 +21,15 @@ export const db = firebase.initializeApp({
 app.use(router).mount('#app')
 
 
+// changes for the designation/list structure
+// from buildings: ["adsfk", "sfwiavdf"] 
+// to {
+//      id: "sdfsdalwerilh", => fetch the document and display
+//      listed_name:
+//      listed_address:
+//      other field:
+//}
+
 
 
 

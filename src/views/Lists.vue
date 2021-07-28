@@ -7,7 +7,7 @@
       <th>Level</th>
     </tr>
     <tr v-for="d in designations" :key="d.id">
-      <td> {{d.designation}} </td>
+      <td> <router-link :to='{name: "ListDetails", params: {id: d.id}}'>{{d.designation}}</router-link> </td>
       <td>{{d.year}}</td>
       <td>{{d.level}}</td>
     </tr>
@@ -36,5 +36,7 @@ export default {
 </script>
 
 <style>
-
+a {
+  color: #2c3e50;
+}
 </style>
