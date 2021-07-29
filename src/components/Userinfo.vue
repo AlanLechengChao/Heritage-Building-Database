@@ -18,6 +18,7 @@ export default {
     created() {
         firebase.auth().onAuthStateChanged(user => {
             this.user = user;
+            this.$emit('userStateChange', user);
         });
     },
     methods: {

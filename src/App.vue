@@ -51,6 +51,11 @@ export default {
   width: 100%;
 }
 
+a {
+  color: #2c3e50;
+  text-decoration: underline;
+}
+
 #nav a {
   padding: 10px 5% 10px 5%;
   background-color: rgb(230, 230, 230);

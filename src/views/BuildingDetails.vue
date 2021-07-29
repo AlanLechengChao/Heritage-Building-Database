@@ -36,7 +36,7 @@
       </table>
       <h3>Lists including the building</h3>
       <div v-if="buildingData" id="listIncluding">
-          <router-link to="#" v-for="d in buildingData.designations" :key="d">{{ d }}</router-link>
+          <router-link :to="{name: 'ListDetails', params: {id: d}}" v-for="d in buildingData.designations" :key="d">{{ d }}</router-link>
       </div>
 
   </div>
