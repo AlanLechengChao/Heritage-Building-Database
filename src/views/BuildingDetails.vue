@@ -69,15 +69,15 @@ export default {
 
 #building-details-map {
     background-color: rgb(206, 206, 206);
-    float: left;
-    margin-right: 1.5em;
+    float: right;
+    margin-right: 0em;
     width: 30%;
     color: rgb(0, 0, 0);
     height: 500px;
 }
 
 #basicInformation {
-    margin-left: 2em;
+    margin-left: 0em;
 }
 
 </style>
