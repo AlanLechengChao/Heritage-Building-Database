@@ -1,5 +1,6 @@
 <template>
   <h1 v-if="buildingData">{{ buildingData.current_name }}</h1>
+  <h1 v-else>Error: Building code not found</h1>
   <div id="building-details-map">map placeholder</div>
   <div v-if="buildingData" id="basicInformation">
       <h3>Basic Information</h3>
