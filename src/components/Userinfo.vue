@@ -25,12 +25,12 @@ export default {
         signoutButtonPressed(e) {
             e.stopPropagation();
             firebase.auth().signOut();
+            this.user = null; 
             this.$router.push({ name: "Login" }); 
         }, 
         LoginButtonPressed(e) {
             e.stopPropagation();
             this.$router.push({ name: "Login" });
-
         }
     }
 };
