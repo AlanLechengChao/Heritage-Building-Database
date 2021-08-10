@@ -1,6 +1,7 @@
 <template>
     <div id="userinfo">
-        <span v-if="user">{{user.email}} | <button @click="signoutButtonPressed">Log out</button></span>
+        <span v-if="user">
+            <router-link :to="{name: 'User', params: { id: user.uid} }" > {{user.email}}  </router-link> | <button @click="signoutButtonPressed">Log out</button></span>
         <span v-else><button @click="LoginButtonPressed">Log in</button></span>
     </div>
 </template>
@@ -18,6 +19,7 @@ export default {
     created() {
         firebase.auth().onAuthStateChanged(user => {
             this.user = user;
+            //console.log(this.user);
             this.$emit('userStateChange', user);
         });
     },

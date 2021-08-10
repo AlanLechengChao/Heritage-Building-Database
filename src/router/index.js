@@ -47,6 +47,14 @@ const routes = [
     }
   }, 
   {
+    path: '/user/:id',
+    name: 'User',
+    component: () => import('../views/User.vue'), 
+    meta: {
+      auth: true
+    }
+  }, 
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'), 
