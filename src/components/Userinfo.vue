@@ -1,7 +1,7 @@
 <template>
     <div id="userinfo">
         <span v-if="user">
-            <router-link :to="{name: 'User', params: { id: user.uid} }" > {{user.email}}  </router-link> | <button @click="signoutButtonPressed">Log out</button></span>
+            <router-link :to="{name: 'User', params: { id: user.uid} }" > {{user.email}}  </router-link> <button @click="signoutButtonPressed">Log out</button></span>
         <span v-else><button @click="LoginButtonPressed">Log in</button></span>
     </div>
 </template>
@@ -38,11 +38,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #userinfo{
   width: 100%;
   padding: 0;
   margin: 0;
   text-align: right;
+  white-space:nowrap; 
+  overflow:hidden; 
 }
 </style>

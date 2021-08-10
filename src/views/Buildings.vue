@@ -1,5 +1,5 @@
 <template>
-  <h2>Buildings</h2>
+  <h2>Buildings <span><button>Add new</button></span></h2>
     <label for="sortBy">Sort By: </label>
     <select v-model="sortBy" id="sortBy" name="sortBy" @change="sort">
         <option value="timestamp">Recently Updated</option>

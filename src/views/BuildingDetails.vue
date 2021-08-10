@@ -1,6 +1,6 @@
 <template>
   <h1 v-if="buildingData">{{ buildingData.current_name }}</h1>
-  <h1 v-else>Error: Building code not found</h1>
+  <h1 v-else v-cloak>Loading...</h1>
   <div id="building-details-map">map placeholder</div>
   <div v-if="buildingData" id="basicInformation">
       <h3>Basic Information</h3>
@@ -11,28 +11,27 @@
           </colgroup>
           <tr>
               <td>Current Name</td>
-              <td>{{ buildingData.current_name }}</td>
-              <td><button>edit</button></td>
+              <td>{{ buildingData.former_names }}</td>
           </tr>
           <tr>
               <td>Former Names</td>
               <td>{{ buildingData.former_names }}</td>
-              <td><button>edit</button></td>
+              
           </tr>
           <tr>
               <td>English Names</td>
               <td>{{ buildingData.english_names }}</td>
-              <td><button>edit</button></td>
+              
           </tr>
           <tr>
               <td>Current Address</td>
               <td>{{ buildingData.current_address }}</td>
-              <td><button>edit</button></td>
+              
           </tr>
           <tr>
               <td>Year</td>
               <td>{{ buildingData.year }}</td>
-              <td><button>edit</button></td>
+             
           </tr>
       </table>
       <h3>Lists including the building</h3>
@@ -45,6 +44,7 @@
 
 <script>
 import { db } from '../main.js'
+
 export default {
     data() {
         return {
