@@ -1,8 +1,8 @@
 <template>
     <div id="userinfo">
         <span v-if="user">
-            <router-link :to="{name: 'User', params: { id: user.uid} }" > {{user.email}}  </router-link> <button @click="signoutButtonPressed">Log out</button></span>
-        <span v-else><button @click="LoginButtonPressed">Log in</button></span>
+            <router-link :to="{name: 'User', params: { id: user.uid} }" > {{user.email}}  </router-link> <button @click.stop="signoutButtonPressed">Log out</button></span>
+        <span v-else><button @click.stop="LoginButtonPressed">Log in</button></span>
     </div>
 </template>
 
@@ -25,13 +25,13 @@ export default {
     },
     methods: {
         signoutButtonPressed(e) {
-            e.stopPropagation();
+            //e.stopPropagation();
             firebase.auth().signOut();
             this.user = null; 
             this.$router.push({ name: "Login" }); 
         }, 
         LoginButtonPressed(e) {
-            e.stopPropagation();
+            //e.stopPropagation();
             this.$router.push({ name: "Login" });
         }
     }

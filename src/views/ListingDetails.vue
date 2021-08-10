@@ -12,17 +12,17 @@
           <tr>
               <td>Listed Name</td>
               <td>{{ listingData.listed_name }}</td>
-              <td><button>edit</button></td>
+              
           </tr>
           <tr>
               <td>Listed Address</td>
               <td>{{ listingData.listed_address }}</td>
-              <td><button>edit</button></td>
+              
           </tr>
           <tr>
               <td>Associated buildings</td>
               <td>TODO: Buildings</td>
-              <td><button>edit</button></td>
+              
           </tr>
       </table>
 

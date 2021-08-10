@@ -5,7 +5,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home, 
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/buildings',
@@ -16,27 +19,50 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function () {
       return import('../views/Buildings.vue')
+    }, 
+    meta: {
+      auth: true
     }
   },
   {
     path: '/buildings/:id',
     name: "BuildingDetails",
-    component: () => import('../views/BuildingDetails.vue')
+    component: () => import('../views/BuildingDetails.vue'), 
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/buildings/:id/edit',
+    name: "EditBuildingDetails",
+    component: () => import('../views/EditBuildingDetails.vue'), 
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/lists',
     name: 'Lists', 
-    component: () => import('../views/Lists.vue')
+    component: () => import('../views/Lists.vue'), 
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/lists/:id',
     name: 'ListDetails',
-    component: () => import('../views/ListDetails.vue')
+    component: () => import('../views/ListDetails.vue'), 
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/lists/:id/items/:listing_id',
     name: 'ListingDetails',
-    component: () => import('../views/ListingDetails.vue')
+    component: () => import('../views/ListingDetails.vue'), 
+    meta: {
+      auth: true
+    }
   },
   {
     path: '/maps',
