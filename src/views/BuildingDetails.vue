@@ -49,7 +49,7 @@
       </tr>
       <tr v-if="buildingData.hasOwnProperty('geographic_info')">
         <td>OSM way</td>
-        <td><el-button @click="osm_redirect"> {{ buildingData.geographic_info.osm_way }}</el-button></td>
+        <td><el-button size="mini" round @click="osm_redirect"> {{ buildingData.geographic_info.osm_way }}</el-button></td>
       </tr>
     </table>
     <h3>Lists including the building</h3>
