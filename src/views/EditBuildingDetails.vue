@@ -1,5 +1,5 @@
 <template>
-  <h1 v-if="buildingData">Editing: {{ buildingData.current_name }}</h1>
+  <h1 v-if="buildingData">Editing: Building: {{ buildingData.current_name }}</h1>
   <h1 v-else>Loading...</h1>
 
   <div id="building-details-map">map placeholder</div>

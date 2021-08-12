@@ -1,50 +1,77 @@
 <template>
-    <div id="userinfo">
-        <span v-if="user">
-            <router-link :to="{name: 'User', params: { id: user.uid} }" > {{user.email}}  </router-link> <button @click.stop="signoutButtonPressed">Log out</button></span>
-        <span v-else><button @click.stop="LoginButtonPressed">Log in</button></span>
-    </div>
+  <div id="userinfo">
+    <el-dropdown v-if="user" trigger="click">
+      <el-button type="primary" class="el-dropdown-link">
+        {{ user.email }}<i class="el-icon-arrow-down el-icon--right"></i>
+      </el-button>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item @click="profileButtonPressed"
+            >My profile</el-dropdown-item
+          >
+          <el-dropdown-item @click="signoutButtonPressed"
+            >Logout</el-dropdown-item
+          >
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+    <el-button v-else @click="LoginButtonPressed">Log in</el-button>
+
+    <!-- <span v-if="user">
+      <router-link :to="{ name: 'User', params: { id: user.uid } }">
+        {{ user.email }}
+      </router-link>
+      <button @click.stop="signoutButtonPressed">Log out</button></span
+    >
+    <span v-else><button @click.stop="LoginButtonPressed">Log in</button></span> -->
+  </div>
 </template>
 
 <script>
-// Userinfo component shows the currently logged in user 
+// Userinfo component shows the currently logged in user
 // on top of the page
 export default {
-    name: "Userinfo",
-    data() {
-        return {
-            user: null
-        };
+  name: "Userinfo",
+  data() {
+    return {
+      user: null,
+    };
+  },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.user = user;
+      //console.log(this.user);
+      this.$emit("userStateChange", user);
+    });
+  },
+  methods: {
+    signoutButtonPressed(e) {
+      //e.stopPropagation();
+      firebase.auth().signOut();
+      this.user = null;
+      this.$router.push({ name: "Login" });
     },
-    created() {
-        firebase.auth().onAuthStateChanged(user => {
-            this.user = user;
-            //console.log(this.user);
-            this.$emit('userStateChange', user);
-        });
+    LoginButtonPressed(e) {
+      //e.stopPropagation();
+      this.$router.push({ name: "Login" });
     },
-    methods: {
-        signoutButtonPressed(e) {
-            //e.stopPropagation();
-            firebase.auth().signOut();
-            this.user = null; 
-            this.$router.push({ name: "Login" }); 
-        }, 
-        LoginButtonPressed(e) {
-            //e.stopPropagation();
-            this.$router.push({ name: "Login" });
-        }
-    }
+    profileButtonPressed(e) {
+      //e.stopPropagation();
+      this.$router.push({ name: "User", params: { id: this.user.uid } });
+    },
+  },
 };
 </script>
 
 <style scoped>
-#userinfo{
+#userinfo {
   width: 100%;
   padding: 0;
   margin: 0;
   text-align: right;
-  white-space:nowrap; 
-  overflow:hidden; 
+}
+
+.el-dropdown-menu li{
+    font-family: Helvetica, Arial, sans-serif;
 }
 </style>
