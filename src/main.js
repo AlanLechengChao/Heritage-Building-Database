@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
+
+/* Element Plus UI kit */ 
+import ElementPlus from 'element-plus'
+import 'element-plus/lib/theme-chalk/index.css'
+
 import App from './App.vue'
 import router from './router'
 
@@ -16,7 +21,7 @@ export const db = firebase.initializeApp({
     authDomain: "heritage-buildings-database.web.app", 
 }).firestore();
 
-
+app.use(ElementPlus)
 
 // bind the app to DOM
 app.use(router).mount('#app')

@@ -1,8 +1,7 @@
 <template>
-  <h1 v-if="buildingData">{{ buildingData.current_name }} </h1>
+  <h1 v-if="buildingData">{{ buildingData.current_name }} <el-button @click="edit">Edit</el-button></h1>
   <h1 v-else v-cloak>Loading...</h1>
   <div id="building-details-map">map placeholder</div>
-  <span><router-link :to="{name: 'EditBuildingDetails', params: { id: id} }"> Edit </router-link></span>
   <div v-if="buildingData" id="basicInformation">
     <h3>Basic Information</h3>
     <table>
@@ -48,9 +47,13 @@
         <td>Year</td>
         <td>{{ buildingData.year }}</td>
       </tr>
+      <tr v-if="buildingData.hasOwnProperty('geographic_info')">
+        <td>OSM way</td>
+        <td><a href="https://openstreetmaps.org/">{{ buildingData.geographic_info.osm_way }}</a></td>
+      </tr>
     </table>
     <h3>Lists including the building</h3>
-    <div v-if="buildingData" id="listIncluding">
+    <div id="listIncluding">
       <router-link
         :to="{ name: 'ListDetails', params: { id: d } }"
         v-for="d in buildingData.designations"
@@ -79,6 +82,11 @@ export default {
         this.buildingData = result.data();
       });
   },
+  methods: {
+    edit () {
+      this.$router.push({ name: "EditBuildingDetails", params: {id: this.id} }); 
+    }
+  }
 };
 </script>
 

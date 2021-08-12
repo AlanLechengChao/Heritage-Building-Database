@@ -21,10 +21,9 @@
     </tr>
   </table>
 
-  <h3>Preferences</h3>
+  <h3>Role</h3>
   <p>
-    You can set up your screen name here. If you do not set up a screen name,
-    your full name as shown above will be displayed on the database.
+    User role data is managed by the website administrator.
   </p>
   <table>
     <colgroup>
@@ -32,10 +31,11 @@
       <col style="width: 16em" />
     </colgroup>
     <tr>
-      <td>Screen Name</td>
-      <td>TODO: Editable screen name</td>
+      <td>Role</td>
+      <td>{{ userData.role }}</td>
     </tr>
   </table>
+
 </template>
 
 <script>
@@ -54,21 +54,25 @@ export default {
     const firebase_auth_user = firebase.auth().currentUser;
     this.authUserData = firebase_auth_user;
 
-    const userRef = db.collection("users").doc(this.id);
-    console.log(this.id);
 
-    userRef
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          console.log("Document data:", doc.data());
-        } else {
-          console.log("No such document!");
+    db.collection(`users`).doc( this.id ).get().then((result) => {
+            if (result.exists) {
+                //console.log("Document data:", result.data());
+                this.userData = result.data();
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
         }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
-      });
+        })
+
+
+
+
+
+
+    this.userData = db.collection("users").doc(this.id).get();
+
+    console.log(this.userData);
   },
 };
 </script>
