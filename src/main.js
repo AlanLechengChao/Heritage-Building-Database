@@ -2,7 +2,8 @@ import { createApp } from 'vue'
 
 /* Element Plus UI kit */ 
 import ElementPlus from 'element-plus'
-import 'element-plus/lib/theme-chalk/index.css'
+//import 'element-plus/lib/theme-chalk/index.css'
+import './theme/index.css'
 
 import App from './App.vue'
 import router from './router'

@@ -49,7 +49,7 @@
       </tr>
       <tr v-if="buildingData.hasOwnProperty('geographic_info')">
         <td>OSM way</td>
-        <td><a href="https://openstreetmaps.org/">{{ buildingData.geographic_info.osm_way }}</a></td>
+        <td><el-button @click="osm_redirect"> {{ buildingData.geographic_info.osm_way }}</el-button></td>
       </tr>
     </table>
     <h3>Lists including the building</h3>
@@ -85,6 +85,9 @@ export default {
   methods: {
     edit () {
       this.$router.push({ name: "EditBuildingDetails", params: {id: this.id} }); 
+    }, 
+    osm_redirect () {
+      window.open(`https://www.openstreetmaps.org/way/${this.buildingData.geographic_info.osm_way}`, '_blank')
     }
   }
 };
