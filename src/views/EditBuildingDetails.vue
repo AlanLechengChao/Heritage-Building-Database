@@ -17,25 +17,31 @@
             <el-form-item label="Current name" prop="current_name">
               <el-input v-model="formBuildingData.current_name"></el-input>
             </el-form-item>
-            <p>For Current address, Former names, and English names, list each item in a new line. </p>
+            <p>
+              For Current address, Former names, and English names, list each
+              item in a new line.
+            </p>
             <el-form-item label="Current address" prop="current_address">
               <el-input
                 type="textarea"
-                v-model="formBuildingData.current_address" autosize
+                v-model="formBuildingData.current_address"
+                autosize
               ></el-input>
             </el-form-item>
 
             <el-form-item label="Former names" prop="former_names">
               <el-input
                 type="textarea"
-                v-model="formBuildingData.former_names" autosize
+                v-model="formBuildingData.former_names"
+                autosize
               ></el-input>
             </el-form-item>
 
             <el-form-item label="English names" prop="english_names">
               <el-input
                 type="textarea"
-                v-model="formBuildingData.english_names" autosize
+                v-model="formBuildingData.english_names"
+                autosize
               ></el-input>
             </el-form-item>
 
@@ -81,7 +87,7 @@ export default {
         ],
         geo_osm_way: [
           {
-            pattern: /^\d+$/, 
+            pattern: /^\d+$/,
             required: false,
             message: "OSM Way must be a number",
             trigger: "blur",
@@ -127,46 +133,56 @@ export default {
       // taken from https://is.gd/hBt8ka
       const splitLines = (str) => str.split(/\r?\n/);
 
+      var newBuildingData = {
+        last_edited_by: this.uid,
+        timestamp: firebase.firestore.Timestamp.now(),
+        current_name: this.formBuildingData.current_name,
+        current_address: splitLines(
+          this.formBuildingData.current_address
+        ).filter((a) => a),
+        english_names: splitLines(this.formBuildingData.english_names).filter(
+          (a) => a
+        ),
+        former_names: splitLines(this.formBuildingData.former_names).filter(
+          (a) => a
+        ),
+        //the filter gets rid of empty elements in the array
+        //from https://melvingeorge.me/blog/remove-empty-elements-from-array-javascript
+      };
+
+      newBuildingData["geographic_info"] = {
+        osm_way: this.formBuildingData.geo_osm_way,
+      };
+
       if (this.id !== "new") {
         //update existing building
         var building_ref = db.collection("buildings").doc(this.id);
         console.log("write: update");
 
-        var newBuildingData = {
-          last_edited_by: this.uid,
-          timestamp: firebase.firestore.Timestamp.now(),
-          current_name: this.formBuildingData.current_name,
-          current_address: splitLines(this.formBuildingData.current_address).filter((a) => a),
-          english_names: splitLines(this.formBuildingData.english_names).filter((a) => a),
-          former_names: splitLines(this.formBuildingData.former_names).filter((a) => a), 
-          //the filter gets rid of empty elements in the array
-          //from https://melvingeorge.me/blog/remove-empty-elements-from-array-javascript
-        };
-
-        newBuildingData["geographic_info"] = {
-          osm_way: this.formBuildingData.geo_osm_way,
-        };
-
         console.log(newBuildingData);
 
-        // building_ref
-        //   .set(newBuildingData, { merge: true })
-        //   .then(() => {
-        //     console.log("Document successfully written!");
-        //   })
-        //   .catch((error) => {
-        //     console.error("Error writing document: ", error);
-        //   });
+        building_ref
+          .set(newBuildingData, { merge: true })
+          .then(() => {
+            console.log("Document successfully written!");
+            this.$message.success("Building data updated");
+            this.$router.push({
+              name: "BuildingDetails",
+              params: { id: this.id },
+            });
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+            this.$message.error(`Error writing document:  ${error}`);
+          });
       } else {
+        //creating new building
         console.log(this.buildingData);
       }
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          //   this.$message.success(
-          //     "Submitted. "
-          //   );
           this.writeToDb();
         } else {
           this.$message.error(
