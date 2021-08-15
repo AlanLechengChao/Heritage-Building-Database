@@ -1,7 +1,7 @@
 <template>
   <div id="userinfo">
     <el-dropdown v-if="user" trigger="click">
-      <el-button type="primary" class="el-dropdown-link">
+      <el-button type="primary" class="el-dropdown-link" size="small">
         {{ user.email }}<i class="el-icon-arrow-down el-icon--right"></i>
       </el-button>
       <template #dropdown>
@@ -15,7 +15,7 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <el-button v-else @click="LoginButtonPressed">Log in</el-button>
+    <el-button size="small" v-else @click="LoginButtonPressed">Log in</el-button>
 
     <!-- <span v-if="user">
       <router-link :to="{ name: 'User', params: { id: user.uid } }">
