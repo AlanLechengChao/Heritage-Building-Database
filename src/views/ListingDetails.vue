@@ -34,35 +34,34 @@
               <span v-else>{{ listingData.listed_address }}</span>
             </el-form-item>
 
+            <el-form-item label="Buildings included">
+              <el-card class="box-card">
+                <el-form-item
+                  v-for="(building, index) in listingData.buildings"
+                  :label="'Building ' + index"
+                  :key="building.key"
+                  :prop="'buildings.' + index + '.value'"
+                  :rules="{
+                    required: true,
+                    message: 'Building code cannot be empty',
+                    trigger: 'blur',
+                  }"
+                >
+                  <div v-if="editingMode">
+                    <el-input v-model="building.value"></el-input
+                    ><el-button @click.prevent="removeBuilding(building)"
+                      >Delete</el-button
+                    >
+                  </div>
 
-<el-form-item label="Buildings included">
-
-
-            <el-card class="box-card">
-              <el-form-item
-                v-for="(building, index) in listingData.buildings"
-                :label="'Building ' + index"
-                :key="building.key"
-                :prop="'buildings.' + index + '.value'"
-                :rules="{
-                  required: true,
-                  message: 'Building code cannot be empty',
-                  trigger: 'blur',
-                }"
-              >
-                <div v-if="editingMode">
-                  <el-input v-model="building.value"></el-input
-                  ><el-button @click.prevent="removeBuilding(building)"
-                    >Delete</el-button
-                  >
-                </div>
-
-                <div v-else>
-                  <span>{{ building.value }}</span>
-                </div>
-              </el-form-item>
-            </el-card>
-</el-form-item>
+                  <div v-else>
+                    <!--span>{{ building.value }}</span-->
+                    <building-link :buildingId='building.value'></building-link>
+                    <!--router-link :to="{name: 'BuildingDetails', params: {id: building.value}}">{{listedBuildingsData[building.value].current_name}}</router-link-->
+                  </div>
+                </el-form-item>
+              </el-card>
+            </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm('listingForm')"
                 >Confirm</el-button
@@ -88,14 +87,15 @@
 
 <script>
 import { db } from "../main.js";
+import BuildingLink from '../components/BuildingLink.vue';
 export default {
   data() {
     return {
       list_id: this.$route.params.id,
       listing_id: this.$route.params.listing_id,
       listingData: null,
+      //listedBuildingsData: null, 
       editingMode: false,
-
       rules: {
         listed_name: [
           {
@@ -123,16 +123,16 @@ export default {
       },
     };
   },
-  mounted() {
+  components: {BuildingLink},
+ mounted() {
+   console.log(this.listing_id); 
     db.collection(`designations/${this.list_id}/items`)
       .doc(this.listing_id)
       .get()
       .then((result) => {
         if (result.exists) {
-          console.log("Document data:", result.data());
           this.listingData = result.data();
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       });
