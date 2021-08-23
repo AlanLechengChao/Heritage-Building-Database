@@ -57,9 +57,9 @@ const routes = [
     }
   },
   {
-    path: '/lists/:id/items/:listing_id',
-    name: 'ListingDetails',
-    component: () => import('../views/ListingDetails.vue'), 
+    path: '/listitems/:listing_id',
+    name: 'ListItemDetails',
+    component: () => import('../views/ListItemDetails.vue'), 
     meta: {
       auth: true
     }

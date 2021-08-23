@@ -30,9 +30,9 @@
     </div>
     
     <h2>Listings - Test section</h2>
-    <div v-if="listings.length != 0" id="listings">
-        <!--router-link v-for="(listing, index) in listData.listings" :key="`listitem-${index}`" :to="{name: 'BuildingDetails', params: {id: listing.buildings[0]}}">{{listing.listed_name}}<br></router-link-->
-        <router-link v-for="l in listings" :key="l.id" :to="{name: 'ListingDetails', params: {id: id, listing_id: l.id}}">{{l.listed_name}}<br></router-link>
+    <div v-if="listItems.length != 0" id="listings">
+        
+        <router-link v-for="l in listItems" :key="l.id" :to="{name: 'ListItemDetails', params: {id: id, listing_id: l.id}}">{{l.list_item_name}}<br></router-link>
         
     </div>
 
@@ -45,7 +45,7 @@ export default {
         return {
             listData: null,
             buildings: [],
-            listings: [], 
+            listItems: [], 
             id: this.$route.params.id
         }
     },
@@ -60,21 +60,29 @@ export default {
         //     })
         // });
         let ref = await db.collection('designations').doc(this.id).get();
-        let alt_listData = await db.collection(`designations/${this.id}/items`).get().then((result) =>{
-            result.forEach((d) => {
-                let data = d.data();
-                data.id = d.id;
-                this.listings.push(data);
-            })
-      });
+    //     let alt_listData = await db.collection(`designations/${this.id}/items`).get().then((result) =>{
+    //         result.forEach((d) => {
+    //             let data = d.data();
+    //             data.id = d.id;
+    //             this.listings.push(data);
+    //         })
+    //   });
         let buildingsRef = await db.collection('buildings').where("designations", "array-contains", this.id).get();
+        let listItemsRef = await db.collection('listitems').where("designation_id", "==", this.id).get();
         this.listData = ref.data();
+        //console.log(listItemsRef); 
         
         
         buildingsRef.forEach((b) => {
             let data = b.data();
             data.id = b.id;
             this.buildings.push(data);
+        })
+
+        listItemsRef.forEach((listitem) => {
+            let data = listitem.data();
+            data.id = listitem.id;
+            this.listItems.push(data);
         })
 
     }

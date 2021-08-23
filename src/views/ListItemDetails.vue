@@ -2,10 +2,10 @@
   <el-row :gutter="20">
     <el-col :span="16"
       ><div class="grid-content bg-purple">
-        <h1 v-if="listingData">{{ listingData.current_name }}</h1>
+        <h1 v-if="listingData">{{ listingData.list_item_name }}</h1>
 
         <div v-if="listingData" id="listingInformation">
-          <h2>{{ list_id }} / {{ listingData.listed_name }}</h2>
+          <h2> {{ listingData.list_item_name }}</h2>
 
           <el-switch
             v-model="editingMode"
@@ -19,12 +19,12 @@
             ref="listingForm"
             label-width="200px"
           >
-            <el-form-item label="Listing Name" prop="listed_name">
+            <el-form-item label="Listing Name" prop="list_item_name">
               <el-input
                 v-if="editingMode"
-                v-model="listingData.listed_name"
+                v-model="listingData.list_item_name"
               ></el-input>
-              <span v-else>{{ listingData.listed_name }}</span>
+              <span v-else>{{ listingData.list_item_name }}</span>
             </el-form-item>
             <el-form-item label="Listing Address" prop="listed_address">
               <el-input
@@ -34,29 +34,29 @@
               <span v-else>{{ listingData.listed_address }}</span>
             </el-form-item>
 
-            <el-form-item label="Buildings included">
+            <el-form-item label="Entities included">
               <el-card class="box-card">
                 <el-form-item
-                  v-for="(building, index) in listingData.buildings"
-                  :label="'Building ' + index"
-                  :key="building.key"
-                  :prop="'buildings.' + index + '.value'"
+                  v-for="(entity, index) in listingData.entities"
+                  :label="'Entity ' + index"
+                  :key="entity.key"
+                  :prop="'entities.' + index + '.value'"
                   :rules="{
                     required: true,
-                    message: 'Building code cannot be empty',
+                    message: 'Entity code cannot be empty',
                     trigger: 'blur',
                   }"
                 >
                   <div v-if="editingMode">
-                    <el-input v-model="building.value"></el-input
-                    ><el-button @click.prevent="removeBuilding(building)"
+                    <el-input v-model="entity.value"></el-input
+                    ><el-button @click.prevent="removeEntity(entity)"
                       >Delete</el-button
                     >
                   </div>
 
                   <div v-else>
                     <!--span>{{ building.value }}</span-->
-                    <building-link :buildingId='building.value'></building-link>
+                    <entity-link :entityId='entity.value'></entity-link>
                     <!--router-link :to="{name: 'BuildingDetails', params: {id: building.value}}">{{listedBuildingsData[building.value].current_name}}</router-link-->
                   </div>
                 </el-form-item>
@@ -87,17 +87,17 @@
 
 <script>
 import { db } from "../main.js";
-import BuildingLink from '../components/BuildingLink.vue';
+import EntityLink from '../components/EntityLink.vue';
 export default {
   data() {
     return {
-      list_id: this.$route.params.id,
+      // list_id: this.$route.params.id,
       listing_id: this.$route.params.listing_id,
       listingData: null,
       //listedBuildingsData: null, 
       editingMode: false,
       rules: {
-        listed_name: [
+        list_item_name: [
           {
             required: true,
             message:
@@ -112,21 +112,15 @@ export default {
               "Please enter the address of the listing as appeared in the original archival document",
             trigger: "change",
           },
-        ],
-        desc: [
-          {
-            required: true,
-            message: "Please input activity form",
-            trigger: "blur",
-          },
-        ],
+        ]
       },
     };
   },
-  components: {BuildingLink},
+  components: {EntityLink},
  mounted() {
    console.log(this.listing_id); 
-    db.collection(`designations/${this.list_id}/items`)
+    //db.collection(`designations/${this.list_id}/items`)
+    db.collection(`listitems`)
       .doc(this.listing_id)
       .get()
       .then((result) => {
@@ -151,16 +145,16 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    removeBuilding(item) {
-      var index = this.listingData.buildings.indexOf(item);
+    removeEntity(item) {
+      var index = this.listingData.entities.indexOf(item);
       if (index !== 0) {
-        this.listingData.buildings.splice(index, 1);
+        this.listingData.entities.splice(index, 1);
       } else {
         this.$message.error("Listing must include at least one building");
       }
     },
-    addBuilding() {
-      this.listingData.buildings.push({
+    addEntity() {
+      this.listingData.entities.push({
         value: "",
         key: Date.now(),
       });

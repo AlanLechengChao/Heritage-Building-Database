@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: 'EntityDetails', params: { id: entityId}}">{{entityData.entityType}} : {{entityData.current_name}}</router-link>
+  <router-link :to="{name: 'BuildingDetails', params: { id: entityId}}">{{entityData.current_name}}</router-link>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
   },
   async mounted() {
     let entityRef = await db.collection("entities").doc(this.entityId).get(); 
-    this.entityData = buildingRef.data(); 
+    this.entityData = entityRef.data(); 
   },
 };
 </script>
