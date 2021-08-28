@@ -2,10 +2,12 @@
   <el-row :gutter="20">
     <el-col :span="16"
       ><div class="grid-content bg-purple">
-        <h1 v-if="listingData">{{ listingData.list_item_name }}</h1>
+        <h1 v-if="listingData">
+          {{ listingData.designation_id }} / {{ listingData.list_item_name }}
+        </h1>
 
         <div v-if="listingData" id="listingInformation">
-          <h2> {{ listingData.list_item_name }}</h2>
+          <h2>{{ listingData.list_item_name }}</h2>
 
           <el-switch
             v-model="editingMode"
@@ -56,7 +58,7 @@
 
                   <div v-else>
                     <!--span>{{ building.value }}</span-->
-                    <entity-link :entityId='entity.value'></entity-link>
+                    <entity-link :entityId="entity.value"></entity-link>
                     <!--router-link :to="{name: 'BuildingDetails', params: {id: building.value}}">{{listedBuildingsData[building.value].current_name}}</router-link-->
                   </div>
                 </el-form-item>
@@ -87,14 +89,15 @@
 
 <script>
 import { db } from "../main.js";
-import EntityLink from '../components/EntityLink.vue';
+import EntityLink from "../components/EntityLink.vue";
 export default {
   data() {
     return {
+      uid: null,
       // list_id: this.$route.params.id,
       listing_id: this.$route.params.listing_id,
       listingData: null,
-      //listedBuildingsData: null, 
+      //listedBuildingsData: null,
       editingMode: false,
       rules: {
         list_item_name: [
@@ -112,14 +115,13 @@ export default {
               "Please enter the address of the listing as appeared in the original archival document",
             trigger: "change",
           },
-        ]
+        ],
       },
     };
   },
-  components: {EntityLink},
- mounted() {
-   console.log(this.listing_id); 
-    //db.collection(`designations/${this.list_id}/items`)
+  components: { EntityLink },
+  mounted() {
+    this.uid = firebase.auth().currentUser.uid;
     db.collection(`listitems`)
       .doc(this.listing_id)
       .get()
@@ -132,6 +134,44 @@ export default {
       });
   },
   methods: {
+    writeToDb() {
+      var newListItemData = {
+        metadata: {
+          last_edited_by: this.uid,
+          last_edited_on: firebase.firestore.Timestamp.now(),
+        },
+        list_item_name: this.listingData.list_item_name,
+        listed_address: this.listingData.listed_address,
+        designation_id: this.listingData.designation_id,
+        entities: this.listingData.entities,
+      };
+
+      if (this.listing_id !== "new") {
+        //update existing building
+        var listitem_ref = db.collection("listitems").doc(this.listing_id);
+        console.log("write: update");
+
+        console.log(newListItemData);
+
+        listitem_ref
+          .set(newListItemData, { merge: true })
+          .then(() => {
+            console.log("Document successfully written!");
+            this.$message.success("List item data updated");
+            this.$router.push({
+              name: "ListItemDetails.vue",
+              params: { listing_id: this.listing_id },
+            });
+          })
+          .catch((error) => {
+            console.error("Error writing document: ", error);
+            this.$message.error(`Error writing document:  ${error}`);
+          });
+      } else {
+        //creating new building
+        console.log(this.newListItemData);
+      }
+    },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -150,7 +190,7 @@ export default {
       if (index !== 0) {
         this.listingData.entities.splice(index, 1);
       } else {
-        this.$message.error("Listing must include at least one building");
+        this.$message.error("Listing must include at least one entity");
       }
     },
     addEntity() {
@@ -177,7 +217,7 @@ export default {
   background-color: rgb(206, 206, 206);
   float: right;
   margin-right: 0em;
-  width: 30%;
+  width: 100%;
   color: rgb(0, 0, 0);
   height: 500px;
 }

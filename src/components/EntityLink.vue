@@ -1,5 +1,6 @@
 <template>
-  <router-link :to="{name: 'BuildingDetails', params: { id: entityId}}">{{entityData.current_name}}</router-link>
+  <router-link v-if="entityData" :to="{name: 'BuildingDetails', params: { id: entityId}}">{{ displayName }}</router-link>
+  <!-- v-if needed to avoid empty entityData raising errors -->
 </template>
 
 <script>
@@ -11,16 +12,26 @@ export default {
     entityId: {
       type: String,
       required: true,
-    },
+    }
   },
   data() {
     return {
-      entityData: {}
+      entityData: null
     };
   },
-  async mounted() {
+  computed: {
+    displayName: function () {
+      return this.entityData.current_names[0]; 
+    }
+  }, 
+  // created () {
+  //   console.log("created: entity id: " + this.entityId); 
+  // }, 
+  async created() {
+    console.log("entity id: " + this.entityId); 
     let entityRef = await db.collection("entities").doc(this.entityId).get(); 
     this.entityData = entityRef.data(); 
+    console.log(this.entityData);
   },
 };
 </script>
