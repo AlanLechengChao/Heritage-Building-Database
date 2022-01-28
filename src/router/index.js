@@ -96,38 +96,38 @@ const router = createRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
-  // this protects meta.auth = true routes from users not logged in, 
-  // when not logged in, redirects to the /login route
-  // additional handling for meta.auth = guest route for login
-  // if the user is in fact logged in
-  // took from https://bit.ly/3yajiHV
-  if (to.matched.some(record => record.meta.auth)) {
-    firebase.auth().onAuthStateChanged(user => { //todo: output from userinfo component?
-      if (user) {
-        next()
-      } else {
-        next({
-          path: "/login",
-        })
-      }
-    })
-  } else if (to.matched.some(record => record.meta.guest)) {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        next({
-          path: "/", //todo: redirect to profile page?
-        })
-      } else {
-        next()
-      }
-    })
+// router.beforeEach((to, from, next) => {
+//   // this protects meta.auth = true routes from users not logged in, 
+//   // when not logged in, redirects to the /login route
+//   // additional handling for meta.auth = guest route for login
+//   // if the user is in fact logged in
+//   // took from https://bit.ly/3yajiHV
+//   if (to.matched.some(record => record.meta.auth)) {
+//     firebase.auth().onAuthStateChanged(user => { //todo: output from userinfo component?
+//       if (user) {
+//         next()
+//       } else {
+//         next({
+//           path: "/login",
+//         })
+//       }
+//     })
+//   } else if (to.matched.some(record => record.meta.guest)) {
+//     firebase.auth().onAuthStateChanged(user => {
+//       if (user) {
+//         next({
+//           path: "/", //todo: redirect to profile page?
+//         })
+//       } else {
+//         next()
+//       }
+//     })
 
-  } else {
-    next()
-  }
+//   } else {
+//     next()
+//   }
 
-})
+// })
 
 
 

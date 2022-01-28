@@ -1,0 +1,6 @@
+2021-11-19
+change map placeholder to a demo map
+searching function
+video demo
+QR Code -> on street (district level)
+finding images / links for each building

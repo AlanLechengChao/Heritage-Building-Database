@@ -97,7 +97,12 @@ export default {
     };
   },
   mounted() {
-    this.uid = firebase.auth().currentUser.uid;
+
+    // this.uid = firebase.auth().currentUser.uid;
+
+    this.uid = null;
+
+    
     console.log(this.id);
     if (this.id !== "new") {
       console.log("MODE: update existing building record");
@@ -109,9 +114,9 @@ export default {
           //Construct formBuildingData from data retrieved from firebase
           this.formBuildingData = {
             current_name: this.buildingData.current_name,
-            former_names: this.buildingData.former_names.join("\n"),
-            current_address: this.buildingData.current_address.join("\n"),
-            english_names: this.buildingData.english_names.join("\n"),
+            former_names: this.buildingData.former_names,
+            current_address: this.buildingData.current_address,
+            english_names: this.buildingData.english_names,
             geo_osm_way: this.buildingData.hasOwnProperty("geographic_info")
               ? this.buildingData.geographic_info.osm_way
               : "",

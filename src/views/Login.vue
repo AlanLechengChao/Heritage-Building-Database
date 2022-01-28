@@ -1,6 +1,6 @@
 <template>
   <h2>Login</h2>
-  <Login />
+  <Login/>
 </template>
 
 <script>

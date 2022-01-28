@@ -1,14 +1,17 @@
 <template>
     <div id='search'>
-        <input v-model="basicSearchTerm" type="text" placeholder="Search" v-if="showBasic" @change="printBasic">
+        <el-input v-model="basicSearchTerm" type="text" placeholder="Search" v-if="showBasic" @change="printBasic"></el-input>
         <br>
-        <button @click="toggleAdvanced">advanced search</button>
+        <el-button @click="toggleAdvanced">advanced search</el-button>
         <div id='advancedSearch' v-if="showAdvanced">
-            <label for="youxiu">优秀历史建筑ID：</label>
-            <input type="text" name="youxiu" v-model="advanced.youxiu_id" @change="printAdvanced">
-            <br>
-            <label for="wenbao">文物保护单位ID：</label>
-            <input type="text" name="wenbao" v-model="advanced.wenbao_id" @change="printAdvanced">
+            <el-form-item label="" prop="youxiu">
+                优秀历史建筑ID：
+                <el-input type="text" name="youxiu" v-model="advanced.youxiu_id" @change="printAdvanced"></el-input>
+            </el-form-item>
+            <el-form-item>
+                文物保护单位ID：
+                <el-input type="text" name="wenbao" v-model="advanced.wenbao_id" @change="printAdvanced"></el-input>
+            </el-form-item>
         </div>
     </div>
 </template>
@@ -44,5 +47,6 @@ export default {
 <style>
     #search {
         float: right;
+        width: 25%;
     }
 </style>

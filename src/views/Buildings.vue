@@ -1,25 +1,31 @@
 <template>
-  <h2>Buildings <span><button>Add new</button></span></h2>
-    <label for="sortBy">Sort By: </label>
-    <select v-model="sortBy" id="sortBy" name="sortBy" @change="sort">
-        <option value="timestamp">Recently Updated</option>
-        <option value="current_name">Alphabetically</option>
-    </select>
-    <label for="order">Order: </label>
-    <select v-model="order" id="order" name="order" @change="sort">
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-    </select>
-  <Search @searchterm="updateTerm" @advanced="updateAdvanced"/>
+    <h2>Buildings <span><el-button>Add new</el-button></span></h2>
+    
+    <Search @searchterm="updateTerm" @advanced="updateAdvanced"/>
   <!-- <button @click="getBuildings">by name</button> -->
-  <div id='buidingsList'>
-      <router-link tag="div" :to="{name: 'BuildingDetails', params: {id: building.id}}" v-for="building in currentDisplay" :key="building.id" class="buildingBox"> 
-          <h4> <span>{{building.current_name}}</span> <span v-if="building.former_names.length > 0"> / </span> <span style="color: grey" v-for="former in building.former_names" :key="former"> {{former}} </span></h4>
-          <h5 v-if="building.english_names.length > 0 && building.english_names[0] != ''">{{building.english_names[0]}}</h5>
-          <p>{{building.id}} </p>
-          <!-- <p v-if="buiding.wenbao_id">文物保护单位ID: {{building.wenbao_id}} </p> -->
-      </router-link>
-  </div>
+    <div style="display: inline; margin-right: 1em;">
+        <label for="sortBy">Sort By: </label>
+        <el-select v-model="sortBy" id="sortBy" name="sortBy" @change="sort">
+            <el-option value="current_name">Alphabetically</el-option>
+            <el-option value="timestamp">Recently Updated</el-option>
+        </el-select>
+    </div>
+    <div style="display: inline;">
+        <label style="padding: 0em 1em 0em 0em;" for="order">Order: </label>
+        <el-select  v-model="order" id="order" name="order" @change="sort">
+            <el-option value="asc">Ascending</el-option>
+            <el-option value="desc">Descending</el-option>
+        </el-select>
+    </div>
+    <div id='buidingsList'>
+
+        <router-link tag="div" :to="{name: 'BuildingDetails', params: {id: building.id}}" v-for="building in currentDisplay" :key="building.id" class="buildingBox"> 
+        <h4> <span>{{building.current_name}}</span> <span v-if="building.former_names.length > 0"> / </span> <span style="color: grey" v-for="former in building.former_names" :key="former"> {{former}} </span></h4>
+        <h5 v-if="building.english_names.length > 0 && building.english_names[0] != ''">{{building.english_names[0]}}</h5>
+        <!-- <p>{{building.id}} </p> -->
+        <!-- <p v-if="buiding.wenbao_id">文物保护单位ID: {{building.wenbao_id}} </p> -->
+        </router-link>
+    </div>
   
 </template>
 
@@ -34,7 +40,7 @@ export default {
             currentDisplay: [],
             sortBy: 'timestamp',
             order: 'asc',
-            basicSearchTerm: '',
+            basicSearchTerm: this.$route.params.basicSearchTerm || '',
             advanced: null
         }
     },
@@ -59,11 +65,15 @@ export default {
             // }
             //
             //
+            console.log(this.basicSearchTerm)
             let ref = db.collection('buildings');
             this.currentDisplay = [];
             
             if (this.basicSearchTerm != '') {
-                ref = ref.where('current_name', '>=', this.basicSearchTerm);
+                let l = this.basicSearchTerm.length;
+                this.sortBy = 'current_name';
+                // console.log(this.basicSearchTerm.slice(0, -1) + String.fromCharCode(this.basicSearchTerm.charCodeAt(l-1)+1));
+                ref = ref.where('current_name', '>=', this.basicSearchTerm).where('current_name', '<=', this.basicSearchTerm.slice(0, -1) + String.fromCharCode(this.basicSearchTerm.charCodeAt(l-1)+1));
             }
             if (this.advanced) {
                 for (const [key, value] of Object.entries(this.advanced)) {
@@ -96,7 +106,7 @@ h4, h5 {
 }
 
 .buildingBox:first-child {
-    margin-top: 10px;
+    margin-top: 1em;
 }
 
 a {

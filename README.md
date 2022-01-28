@@ -24,3 +24,12 @@ firebase deploy
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Meeting Notes
+### Jan 17
+1. **The Website Demo**
+2. Search Engine
+3. Maps / Map?
+4. CSS problems, address being vertical
+5. Check the excel with Archive Materials
+6. Update Database buildings list
