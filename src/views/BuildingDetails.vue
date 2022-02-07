@@ -19,11 +19,7 @@
       <tr>
         <td>Former Names</td>
         <td>
-          <ul>
-            <li :key="item" v-for="item in buildingData.former_names">
-              {{ item }}
-            </li>
-          </ul>
+          {{buildingData.former_names}}
         </td>
       </tr>
       <tr>

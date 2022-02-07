@@ -33,3 +33,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 4. CSS problems, address being vertical
 5. Check the excel with Archive Materials
 6. Update Database buildings list
+
+
+## Meeting Notes
+### Jan 28
+1. pre 1977 onto the main list
+2. building desription
+3. picture

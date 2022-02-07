@@ -39,8 +39,9 @@ app.use(router).mount('#app')
 
 
 
-
-
+ 
+var allBuildings = db.collection('buildings');
+console.log(allBuildings)
 
 
 

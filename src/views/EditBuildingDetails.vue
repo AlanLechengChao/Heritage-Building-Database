@@ -4,8 +4,8 @@
   </h1>
   <h1 v-else>Loading...</h1>
   <el-row :gutter="20">
-    <el-col :span="16"
-      ><div class="grid-content">
+    <el-col :span="16">
+      <div class="grid-content">
         <div v-if="formBuildingData" id="basicInformation">
           <el-form
             :model="formBuildingData"
@@ -136,21 +136,15 @@ export default {
     writeToDb() {
       // convert multiline string to array
       // taken from https://is.gd/hBt8ka
-      const splitLines = (str) => str.split(/\r?\n/);
+      // const splitLines = (str) => str.split(/\r?\n/);
 
       var newBuildingData = {
         last_edited_by: this.uid,
         timestamp: firebase.firestore.Timestamp.now(),
         current_name: this.formBuildingData.current_name,
-        current_address: splitLines(
-          this.formBuildingData.current_address
-        ).filter((a) => a),
-        english_names: splitLines(this.formBuildingData.english_names).filter(
-          (a) => a
-        ),
-        former_names: splitLines(this.formBuildingData.former_names).filter(
-          (a) => a
-        ),
+        current_address: this.formBuildingData.current_address,
+        english_names: this.formBuildingData.english_names,
+        former_names: this.formBuildingData.former_names,
         //the filter gets rid of empty elements in the array
         //from https://melvingeorge.me/blog/remove-empty-elements-from-array-javascript
       };
