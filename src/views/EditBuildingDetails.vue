@@ -144,7 +144,7 @@ export default {
         current_name: this.formBuildingData.current_name,
         current_address: this.formBuildingData.current_address,
         english_names: this.formBuildingData.english_names,
-        former_names: this.formBuildingData.former_names,
+        former_names: this.formBuildingData.former_names  ,
         //the filter gets rid of empty elements in the array
         //from https://melvingeorge.me/blog/remove-empty-elements-from-array-javascript
       };
