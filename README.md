@@ -40,3 +40,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1. pre 1977 onto the main list
 2. building desription
 3. picture
+
+## Meeting Notes
+### Feb 7, with Tony
+1. Picture & Description / html -> live to be finish
+2. Map for building -> tbd
+3. wash database

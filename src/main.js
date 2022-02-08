@@ -41,7 +41,13 @@ app.use(router).mount('#app')
 
  
 var allBuildings = db.collection('buildings');
-console.log(allBuildings)
+// allBuildings.where('current_name', '==', '真如寺正殿').get().then((querySnapshot) => {
+//     querySnapshot.forEach((doc) => {
+//         // doc.data() is never undefined for query doc snapshots
+//         console.log(doc.id, " => ", doc.data());
+//     });
+// })
+
 
 
 
