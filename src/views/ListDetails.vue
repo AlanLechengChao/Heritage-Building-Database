@@ -19,22 +19,32 @@
             </tr>
             <tr>
                 <th>Details</th>
-                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel gravida enim. Donec mi nulla, sagittis at rutrum et, ultricies vitae sem. Integer euismod eros egestas quam scelerisque vestibulum. Aliquam sed feugiat justo. Aenean mollis molestie velit. Cras bibendum, velit nec luctus dapibus, orci justo aliquam purus, ut varius nulla lorem nec lorem. Maecenas eget nunc quis velit condimentum placerat. In euismod vestibulum augue id interdum. Vestibulum sed aliquet massa.</td>
+                <td v-if="listData.description">{{listData.description}}</td>
             </tr>
         </table>
     </div>
     <h2>Buildings</h2>
-    <div v-if="buildings.length != 0" id="builings">
+    <div id='buidingsList'>
+
+        <router-link tag="div" :to="{name: 'BuildingDetails', params: {id: building.id}}" v-for="building in buildings" :key="building.id" class="buildingBox"> 
+            <h4> <span>{{building.current_name}}</span> <span v-if="building.former_names.length > 0"> / </span> <span style="color: grey" v-for="former in building.former_names" :key="former"> {{former}} </span></h4>
+            <h5 v-if="building.english_names.length > 0 && building.english_names[0] != ''">{{building.english_names}}</h5>
+        <!-- <p>{{building.id}} </p> -->
+        <!-- <p v-if="buiding.wenbao_id">文物保护单位ID: {{building.wenbao_id}} </p> -->
+        </router-link>
+    </div>
+    <!-- <div v-if="buildings.length != 0" id="builings">
         <router-link v-for="b in buildings" :key="b.id" :to="{name: 'BuildingDetails', params: {id: b.id}}">{{b.current_name}}<br></router-link>
         
-    </div>
+    </div> -->
     
-    <h2>Listings - Test section</h2>
+    <!-- until further construction -->
+    <!-- <h2>Listings - Test section</h2>
     <div v-if="listItems.length != 0" id="listings">
         
         <router-link v-for="l in listItems" :key="l.id" :to="{name: 'ListItemDetails', params: {id: id, listing_id: l.id}}">{{l.list_item_name}}<br></router-link>
         
-    </div>
+    </div> -->
 
 </template>
 
@@ -90,5 +100,23 @@ export default {
 </script>
 
 <style>
-
+#basic-information {
+    /* float: right; */
+    width: 60%;
+}
+a {
+    display: block;
+    text-decoration: none;
+    color: #2c3e50;
+}
+.buildingBox:hover {
+    background-color: rgb(228, 227, 227);
+}
+.buildingBox {
+    width: 70%;
+    padding: 1em;
+    background-color: rgb(245, 244, 244);
+    border-bottom: 1px solid;
+    border-color: rgb(200,200,200);
+}
 </style>

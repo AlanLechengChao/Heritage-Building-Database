@@ -21,7 +21,7 @@
 
         <router-link tag="div" :to="{name: 'BuildingDetails', params: {id: building.id}}" v-for="building in currentDisplay" :key="building.id" class="buildingBox"> 
         <h4> <span>{{building.current_name}}</span> <span v-if="building.former_names.length > 0"> / </span> <span style="color: grey" v-for="former in building.former_names" :key="former"> {{former}} </span></h4>
-        <h5 v-if="building.english_names.length > 0 && building.english_names[0] != ''">{{building.english_names[0]}}</h5>
+        <h5 v-if="building.english_names.length > 0 && building.english_names[0] != ''">{{building.english_names}}</h5>
         <!-- <p>{{building.id}} </p> -->
         <!-- <p v-if="buiding.wenbao_id">文物保护单位ID: {{building.wenbao_id}} </p> -->
         </router-link>

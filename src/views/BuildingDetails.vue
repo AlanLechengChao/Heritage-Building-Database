@@ -17,28 +17,23 @@
             </tr>
             <tr>
               <td>Former Names</td>
-              <td>
+              <td v-if="buildingData.former_names[0]">
                 {{buildingData.former_names}}
+              </td>
+              <td v-else>
+                N/A
               </td>
             </tr>
             <tr>
               <td>English Names</td>
               <td>
-                <ul>
-                  <li :key="item" v-for="item in buildingData.english_names">
-                    {{ item }}
-                  </li>
-                </ul>
+                {{buildingData.english_names}}
               </td>
             </tr>
             <tr>
               <td>Current Address</td>
               <td>
-                <ul>
-                  <li :key="item" v-for="item in buildingData.current_address">
-                    {{ item }}
-                  </li>
-                </ul>
+                {{buildingData.current_address}}
               </td>
             </tr>
             <tr>
@@ -65,11 +60,16 @@
       </div>
     </el-col>
     <el-col :span="8">
-      <div class="grid-content">
-        <div  id="image"> 
-          <img src="buildingData.picture" alt="">
+      <div v-if="buildingData" class="grid-content">
+        <h4>Image</h4>
+        <div id="image">
+          
+          <img v-if="buildingData.image" v-bind:src="buildingData.image" alt="">
         </div>
-        <div id="building-details-map">map placeholder</div>
+        <h4>Map</h4>
+        <div id="building-details-map">
+          <iframe v-if="buildingData.maplink" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" v-bind:src="buildingData.maplink"></iframe>
+        </div>
         
       </div>
     </el-col>
