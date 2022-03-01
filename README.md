@@ -41,10 +41,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 2. building desription
 3. picture
 
-## Meeting Notes
+
 ### Feb 7, with Tony
 1. Picture & Description / html -> live to be finish
 2. Map for building -> tbd
 3. wash database
 
-hello
+### Feb 15, with Tony
+1. 大规模Wash -> Node.js script
+    1. Google Sheet -> .csv
+    2. Node.js read csv
+    3. Node.js upload csv data to firebase
+2. Interactive Map -> Leaflet, js library

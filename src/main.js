@@ -8,7 +8,18 @@ import './theme/index.css'
 import App from './App.vue'
 import router from './router'
 
+import * as L from 'leaflet'
+
 let app = createApp(App)
+
+
+
+export const OverpassFrontend = require('overpass-frontend');
+
+export const overpassFrontend = new OverpassFrontend('//overpass-api.de/api/interpreter');
+
+// request restaurants in the specified bounding box
+
 
 // define firebase firestore instance in global namespace
 // app.config.globalProperties.$db = firebase.initializeApp({
@@ -40,15 +51,20 @@ app.use(router).mount('#app')
 
 
  
-var allBuildings = db.collection('buildings');
-// allBuildings.where('current_name', '==', '真如寺正殿').get().then((querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//         // doc.data() is never undefined for query doc snapshots
-//         console.log(doc.id, " => ", doc.data());
+// var allBuildings = db.collection('buildings');
+// allBuildings.get().then(query => {
+//     query.forEach(element => {
+//         let data = element.data();
+//         let id = element.id;
+//         if (typeof data.year == 'object') {
+//             let u = data.year.join('\n');
+//             db.collection('buildings').doc(id).update({
+//                 year: u
+//             }).then(() => console.log(u));
+//         }
+        
 //     });
 // })
-
-
 
 
 

@@ -46,8 +46,12 @@
             </el-form-item>
 
             <h3>Geographic Information</h3>
-            <el-form-item label="OpenStreetMaps Way number" prop="geo_osm_way">
+            <el-form-item label="OpenStreetMaps Way" prop="geo_osm_way">
               <el-input v-model="formBuildingData.geo_osm_way"></el-input>
+            </el-form-item>
+            <h3>Description</h3>
+            <el-form-item label="Description" prop="description">
+              <el-input type="textarea" autosize v-model="formBuildingData.description"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="submitForm('building_form')"
@@ -69,6 +73,7 @@
 
 <script>
 import { db } from "../main.js";
+
 
 export default {
   data() {
@@ -120,6 +125,7 @@ export default {
             geo_osm_way: this.buildingData.hasOwnProperty("geographic_info")
               ? this.buildingData.geographic_info.osm_way
               : "",
+            description: this.buildingData.description
           };
         });
     } else {
@@ -129,6 +135,7 @@ export default {
         former_names: "",
         english_names: "",
         geo_osm_way: "",
+        description: ""
       };
     }
   },
@@ -144,7 +151,8 @@ export default {
         current_name: this.formBuildingData.current_name,
         current_address: this.formBuildingData.current_address,
         english_names: this.formBuildingData.english_names,
-        former_names: this.formBuildingData.former_names  ,
+        former_names: this.formBuildingData.former_names,
+        description: this.formBuildingData.description
         //the filter gets rid of empty elements in the array
         //from https://melvingeorge.me/blog/remove-empty-elements-from-array-javascript
       };
