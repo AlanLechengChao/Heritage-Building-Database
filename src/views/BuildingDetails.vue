@@ -25,7 +25,7 @@
               </td>
             </tr>
             <tr>
-              <td >English Names</td>
+              <td>English Names</td>
               <td v-if="buildingData.english_names">
                 {{buildingData.english_names}}
               </td>
@@ -34,7 +34,7 @@
               </td>
             </tr>
             <tr>
-              <td >Current Address</td>
+              <td>Current Address</td>
               <td v-if="buildingData.current_address">
                 {{buildingData.current_address}}
               </td>
@@ -57,8 +57,7 @@
               :to="{ name: 'ListDetails', params: { id: d } }"
               v-for="d in buildingData.designations"
               :key="d"
-              >{{ d }}</router-link
-            >
+              >{{ d }}</router-link>
           </div>
           <h3>Description</h3>
           <el-p v-if="buildingData.description" id="description">{{ buildingData.description }}</el-p>
@@ -67,13 +66,12 @@
     </el-col>
     <el-col :span="8">
       <div v-if="buildingData" class="grid-content">
-        <h4>Image</h4>
-        <div id="image">
-          
+        <!-- <h4>Image</h4> -->
+        <div id="image">  
           <img v-if="buildingData.image" v-bind:src="buildingData.image" alt="">
         </div>
-        <h4>Map</h4>
-        <div id="building-details-map" style="height: 300px;">
+        <!-- <h4>Map</h4> -->
+        <div id="building-details-map" style="height: 300px; margin-top: 1em;">
           <iframe v-if="buildingData.maplink" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" v-bind:src="buildingData.maplink"></iframe>
         </div>
         
@@ -115,11 +113,12 @@ export default {
   watch: {
     buildingData(_new) {
       let ref = this;
-      overpassFrontend.get(
-        [`w${this.buildingData.geographic_info.osm_way}`],
-        {
+      if (this.buildingData.geographic_info) {
+        overpassFrontend.get(
+          [`w${this.buildingData.geographic_info.osm_way}`],
+          {
             properties: OverpassFrontend.TAGS | OverpassFrontend.GEOM | OverpassFrontend.BBOX
-        },
+          },
         function (err, result) {
             if (result) {
               ref.osmData = result;
@@ -127,11 +126,13 @@ export default {
             } else {
                 console.log('* empty result')
             }
-        },
+          },
         function (err) {
             if (err) { console.log(err) }
-        }
-      )
+          }
+        )
+      }
+
     },
     osmData(_new) {
       console.log('watch', _new);
@@ -146,9 +147,16 @@ export default {
 
 <style scoped>
 #listIncluding a {
+  margin-top: 5px;
   display: block;
   color: #2c3e50;
   text-decoration: underline;
+}
+
+#description {
+  margin-top: 5px;
+  max-width: 600px;
+  display: inline-block;
 }
 
 #building-details-map {
@@ -172,6 +180,14 @@ export default {
 
 h4 {
   margin: 0%;
+}
+
+h3:first-child {
+  margin-top: 0;
+}
+
+h3 {
+  margin-bottom: 0;
 }
 
 img {

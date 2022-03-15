@@ -104,6 +104,11 @@ export default {
     /* float: right; */
     width: 60%;
 }
+
+.th {
+    vertical-align: baseline;
+}
+
 a {
     display: block;
     text-decoration: none;

@@ -69,6 +69,7 @@ export default {
   padding: 0;
   margin: 0;
   text-align: right;
+  display: inline-block;
 }
 
 .el-dropdown-menu li{

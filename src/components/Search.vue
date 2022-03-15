@@ -48,5 +48,6 @@ export default {
     #search {
         float: right;
         width: 25%;
+        margin-top: 1em;
     }
 </style>

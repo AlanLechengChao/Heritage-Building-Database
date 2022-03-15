@@ -41,7 +41,8 @@ export default {
             sortBy: 'timestamp',
             order: 'asc',
             basicSearchTerm: this.$route.params.basicSearchTerm || '',
-            advanced: null
+            advanced: null,
+            queryMap: {'Alphabetically': 'current_name', 'Recently Updated': 'timestamp', 'Ascending': 'asc', 'Descending': 'desc'}
         }
     },
     methods: {

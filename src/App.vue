@@ -1,7 +1,8 @@
 <template>
 <userinfo></userinfo>
   
-  
+  <h1 id="banner">Database of Shanghai Cultural Heritage Sites</h1>
+  <div id="bannner_pic"></div>
   <div id="nav">
     <router-link to="/">Home</router-link>
     <router-link to="/buildings">Buildings</router-link>
@@ -70,5 +71,17 @@ a {
   /* color: #42b983; */
   font-weight: bold;
   background-color: lightgray;
+}
+
+#banner {
+  display: block;
+}
+
+#banner_pic {
+  width: 500px;
+  height: 100px;
+  display: block;
+  position: absolute;
+  background: #2c3e50;
 }
 </style>
