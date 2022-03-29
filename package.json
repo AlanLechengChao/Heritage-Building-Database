@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "element-plus": "^1.0.2-beta.70",
-    "firebase": "^9.6.6",
+    "firebase": "^9.6.9",
     "leaflet": "^1.7.1",
     "overpass-frontend": "^2.7.0",
     "vue": "^3.0.0",
@@ -24,5 +24,17 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "description": "## Project setup ``` npm install ```",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanLechengChao/Heritage-Building-Database.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlanLechengChao/Heritage-Building-Database/issues"
+  },
+  "homepage": "https://github.com/AlanLechengChao/Heritage-Building-Database#readme"
 }

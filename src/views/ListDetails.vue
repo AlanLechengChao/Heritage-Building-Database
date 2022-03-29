@@ -100,28 +100,34 @@ export default {
 </script>
 
 <style>
+
+
 #basic-information {
     /* float: right; */
     width: 60%;
 }
 
-.th {
-    vertical-align: baseline;
+th {
+    vertical-align:top;
+}
+
+td {
+    white-space: pre-wrap;
 }
 
 a {
     display: block;
     text-decoration: none;
-    color: #2c3e50;
+    color: #1f5e4e;
 }
 .buildingBox:hover {
-    background-color: rgb(228, 227, 227);
+    background-color: rgb(90, 129, 118);
 }
 .buildingBox {
     width: 70%;
     padding: 1em;
     background-color: rgb(245, 244, 244);
     border-bottom: 1px solid;
-    border-color: rgb(200,200,200);
+    border-color: rgb(90, 129, 118);
 }
 </style>

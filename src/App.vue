@@ -35,6 +35,7 @@ export default {
 </script>
 
 <style>
+
 #app {
   margin: auto;
   max-width: 80%;
@@ -42,7 +43,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
-  color: #2c3e50;
+  color: #0b5744;
 }
 
 #nav {
@@ -50,31 +51,37 @@ export default {
   /* text-align: justify; */
   padding: 30px 0 20px 0;
   width: 100%;
+
 }
 
 a {
-  color: #2c3e50;
+  color: #000000;
   text-decoration: underline;
 }
 
 #nav a {
   padding: 10px 5% 10px 5%;
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(169, 190, 179);
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  color: #2c3e50;
+  color: #eff8f6;
   width: 15%;
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
 }
 
 #nav a.router-link-active {
   /* color: #42b983; */
   font-weight: bold;
-  background-color: lightgray;
+  background-color: rgb(74, 128, 111);
 }
 
 #banner {
   display: block;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  /* font-size; */
+  margin-bottom: 0
 }
 
 #banner_pic {
@@ -82,6 +89,6 @@ a {
   height: 100px;
   display: block;
   position: absolute;
-  background: #2c3e50;
+  background: #358073;
 }
 </style>

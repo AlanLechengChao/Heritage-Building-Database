@@ -170,6 +170,7 @@ export default {
 
 #basicInformation {
   margin-left: 0em;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 #image {
@@ -177,7 +178,9 @@ export default {
   /* background-color: red; */
   height: 100%;
 }
-
+h1{
+  font-family: 'Times New Roman', Times, serif;
+}
 h4 {
   margin: 0%;
 }

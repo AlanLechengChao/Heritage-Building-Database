@@ -209,12 +209,12 @@ export default {
 <style scoped>
 #listIncluding a {
   display: block;
-  color: #2c3e50;
+  color: #56907b;
   text-decoration: underline;
 }
 
 #listing-details-map {
-  background-color: rgb(206, 206, 206);
+  background-color: rgb(90, 129, 118);
   float: right;
   margin-right: 0em;
   width: 100%;
