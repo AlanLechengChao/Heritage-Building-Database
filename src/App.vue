@@ -1,8 +1,12 @@
 <template>
-<userinfo></userinfo>
+
   
-  <h1 id="banner">Database of Shanghai Cultural Heritage Sites</h1>
-  <div id="bannner_pic"></div>
+  <div id="banner_box">
+    <userinfo></userinfo>
+    <h1 id="banner">Database of Shanghai Cultural Heritage Sites</h1>
+  </div>
+  
+  <!-- <img id="banner_pic" src="https://raw.githubusercontent.com/AlanLechengChao/Heritage-Building-Database/main/banner.jpeg" alt=""> -->
   <div id="nav">
     <router-link to="/">Home</router-link>
     <router-link to="/buildings">Buildings</router-link>
@@ -36,6 +40,10 @@ export default {
 
 <style>
 
+body {
+  margin-top: 0;
+}
+
 #app {
   margin: auto;
   max-width: 80%;
@@ -43,15 +51,18 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
-  color: #0b5744;
+  color: #064434;
 }
 
 #nav {
   margin: auto;
   /* text-align: justify; */
-  padding: 30px 0 20px 0;
+  padding: 0 0 20px 0;
   width: 100%;
-
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  
 }
 
 a {
@@ -60,6 +71,7 @@ a {
 }
 
 #nav a {
+  
   padding: 10px 5% 10px 5%;
   background-color: rgb(169, 190, 179);
   text-decoration: none;
@@ -72,23 +84,44 @@ a {
 }
 
 #nav a.router-link-active {
+  transition: 1s all;
   /* color: #42b983; */
   font-weight: bold;
-  background-color: rgb(74, 128, 111);
+  background-color: rgb(30, 155, 115);
 }
 
 #banner {
-  display: block;
+  /* display: inline-block; */
+  font-size: 3em;
+  /* color:; */
   font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight: 900;
   /* font-size; */
-  margin-bottom: 0
+  color: rgb(251, 251, 251);
+  margin-bottom: 0;
+  /* margin-left: 20px; */
+  position: absolute;
+  bottom: 5%;
+  text-align: center;
+  /* margin: auto; */
+  /* margin-top: 0; */
+}
+
+#banner_box {
+  /* width: 100%; */
+  
+  height: 180px;
+  position: relative;
+  background-image: url("https://raw.githubusercontent.com/AlanLechengChao/Heritage-Building-Database/main/banner.jpeg");
+  background-size: cover;
+  background-position-y: 30%;
 }
 
 #banner_pic {
-  width: 500px;
-  height: 100px;
+  width: 100%;
+  /* height: 100px; */
   display: block;
-  position: absolute;
-  background: #358073;
+  /* position: absolute; */
+  /* background: #358073; */
 }
 </style>

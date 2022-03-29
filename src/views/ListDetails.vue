@@ -120,7 +120,7 @@ a {
     text-decoration: none;
     color: #1f5e4e;
 }
-.buildingBox:hover {
+/* .buildingBox:hover {
     background-color: rgb(90, 129, 118);
 }
 .buildingBox {
@@ -129,5 +129,5 @@ a {
     background-color: rgb(245, 244, 244);
     border-bottom: 1px solid;
     border-color: rgb(90, 129, 118);
-}
+} */
 </style>

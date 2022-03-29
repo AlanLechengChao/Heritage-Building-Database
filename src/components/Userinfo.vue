@@ -65,10 +65,11 @@ export default {
 
 <style scoped>
 #userinfo {
-  width: 100%;
+  /* width: 100%; */
   padding: 0;
-  margin: 0;
-  text-align: right;
+  float: right;
+  margin: 10px;
+  /* text-align: right; */
   display: inline-block;
 }
 
